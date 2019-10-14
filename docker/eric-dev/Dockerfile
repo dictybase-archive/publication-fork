@@ -28,4 +28,5 @@ FROM dictybase/static-server:2.0.2
 RUN mkdir /www
 WORKDIR /www
 COPY --from=0 /usr/src/app/build ./
+RUN mv *.js *.json *.ico ./static/
 ENTRYPOINT ["/usr/local/bin/app", "run", "-f", "/www", "--sub-url", "/publication"]
