@@ -6,6 +6,9 @@ if ("function" === typeof importScripts) {
   if (workbox) {
     console.log("Workbox is loaded")
 
+    /* injection point for manifest files.  */
+    workbox.precaching.precacheAndRoute([])
+
     // matches a properly formed URL
     const regexUrl = "(?:https://.*)?"
 
