@@ -74,11 +74,12 @@
     "react-styleguidist": "^9.0.5",
     "semantic-release": "^15.13.24",
     "source-map-explorer": "^1.8.0",
-    "waait": "^1.0.4"
+    "waait": "^1.0.4",
+    "workbox-build": "^4.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run build-sw && npm run clean-cra-sw",
     "test": "react-scripts test",
     "test-coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
@@ -92,7 +93,9 @@
     "local-ci-eric": "IMAGE_TAG=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||' -e 's~/~-~')-$(git rev-parse --short HEAD) skaffold run -p ericdev",
     "local-ci-sidd": "IMAGE_TAG=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||' -e 's~/~-~')-$(git rev-parse --short HEAD) skaffold run -p devsidd",
     "local-ci-staging": "IMAGE_TAG=staging-$(git rev-parse --short HEAD) skaffold run",
-    "nightwatch": "nightwatch -e chrome"
+    "nightwatch": "nightwatch -e chrome",
+    "build-sw": "node ./src/sw-build.js",
+    "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js"
   },
   "eslintConfig": {
     "extends": "react-app"
