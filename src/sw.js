@@ -5,58 +5,60 @@ if ("function" === typeof importScripts) {
   /* global workbox */
   if (workbox) {
     console.log("Workbox is loaded")
+    // Detailed logging is very useful during development
+    workbox.setConfig({ debug: true })
 
     /* injection point for manifest files.  */
     workbox.precaching.precacheAndRoute([])
 
-    // matches a properly formed URL
-    const regexUrl = "(?:https://.*)?"
+    // // matches a properly formed URL
+    // const regexUrl = "(?:https://.*)?"
 
-    // cache data fetched from content api
-    workbox.routing.registerRoute(
-      new RegExp(`${regexUrl}/publication/.*`),
-      workbox.strategies.cacheFirst({
-        cacheName: "publication-route",
-      }),
-    )
+    // // cache data fetched from content api
+    // workbox.routing.registerRoute(
+    //   new RegExp(`${regexUrl}/publication/.*`),
+    //   workbox.strategies.cacheFirst({
+    //     cacheName: "publication-route",
+    //   }),
+    // )
 
-    // image caching
-    workbox.routing.registerRoute(
-      /\.(?:png|gif|jpg|jpeg|svg)$/,
-      workbox.strategies.cacheFirst({
-        cacheName: "images",
-        plugins: [
-          new workbox.expiration.Plugin({
-            maxEntries: 20,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
-          }),
-        ],
-      }),
-    )
+    // // image caching
+    // workbox.routing.registerRoute(
+    //   /\.(?:png|gif|jpg|jpeg|svg)$/,
+    //   workbox.strategies.cacheFirst({
+    //     cacheName: "images",
+    //     plugins: [
+    //       new workbox.expiration.Plugin({
+    //         maxEntries: 20,
+    //         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+    //       }),
+    //     ],
+    //   }),
+    // )
 
-    // css caching
-    workbox.routing.registerRoute(
-      /\.(?:css)$/,
-      workbox.strategies.staleWhileRevalidate({
-        cacheName: "css",
-      }),
-    )
+    // // css caching
+    // workbox.routing.registerRoute(
+    //   /\.(?:css)$/,
+    //   workbox.strategies.staleWhileRevalidate({
+    //     cacheName: "css",
+    //   }),
+    // )
 
-    // js caching
-    workbox.routing.registerRoute(
-      /\.(?:js)$/,
-      workbox.strategies.staleWhileRevalidate({
-        cacheName: "javascript",
-      }),
-    )
+    // // js caching
+    // workbox.routing.registerRoute(
+    //   /\.(?:js)$/,
+    //   workbox.strategies.staleWhileRevalidate({
+    //     cacheName: "javascript",
+    //   }),
+    // )
 
-    // font caching
-    workbox.routing.registerRoute(
-      /\.(?:woff|woff2|eot|ttf)$/,
-      workbox.strategies.staleWhileRevalidate({
-        cacheName: "fonts",
-      }),
-    )
+    // // font caching
+    // workbox.routing.registerRoute(
+    //   /\.(?:woff|woff2|eot|ttf)$/,
+    //   workbox.strategies.staleWhileRevalidate({
+    //     cacheName: "fonts",
+    //   }),
+    // )
   } else {
     console.log("Workbox could not be loaded. No Offline support")
   }
