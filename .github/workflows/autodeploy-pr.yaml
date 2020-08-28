@@ -87,7 +87,7 @@ jobs:
         with:
           version: "v2.16.9"
       - name: get gcloud credentials for k8s cluster
-        run: gcloud container clusters get-credentials --project ${{ secrets.PROJECT_ID }} --zone ${{ steps.deploy_info.outputs.zone }} ${{ steps.deploy_info.outputs.cluster }}
+        run: gcloud container clusters get-credentials --project ${{ secrets.DEV_PROJECT_ID }} --zone ${{ steps.deploy_info.outputs.zone }} ${{ steps.deploy_info.outputs.cluster }}
       - name: deploy chart
         if: ${{ success() }}
         run: actions --log-level debug dc --name ${{ steps.deploy_info.outputs.chart }} --namespace ${{ steps.deploy_info.outputs.namespace }} --image-tag ${{ steps.deploy_info.outputs.image_tag }} --path ${{ steps.deploy_info.outputs.path }}
