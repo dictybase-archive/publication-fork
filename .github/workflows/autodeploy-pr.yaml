@@ -6,6 +6,8 @@ jobs:
   build:
     if: ${{ contains(github.event.pull_request.labels.*.name, 'deploy') }}
     runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: "1"
     steps:
       - name: check out code
         uses: actions/checkout@v2
