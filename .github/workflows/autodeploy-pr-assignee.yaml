@@ -19,11 +19,11 @@ jobs:
         id: vars
         run: |
           echo ::set-output name=short_sha::$(git rev-parse --short HEAD)
-          if [ ${{ github.event.pull_request.user.login }} == "wildlifehexagon" ]
+          if [ ${{ matrix.assignee }} == "wildlifehexagon" ]
           then
             echo ::set-output name=cluster::"erickube"
             echo ::set-output name=docker_path::"docker/eric-dev/Dockerfile"
-          elif [ ${{ github.event.pull_request.user.login }} == "cybersiddhu" ]
+          elif [ ${{ matrix.assignee }} == "cybersiddhu" ]
           then
             echo ::set-output name=cluster::"siddkube"
             echo ::set-output name=docker_path::"docker/sidd-dev/Dockerfile"
